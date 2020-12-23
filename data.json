@@ -1,0 +1,25 @@
+[
+  {
+    "user1": {
+      "isAdmin": true,
+      "isLogIn": true,
+      "userName": "ido",
+      "userEmail": "bob@gmail.com"
+    }
+  },
+  {
+    "pet1": {
+      "type": "cat",
+      "breed": "mixed",
+      "name": "loi",
+      "adoptionStatus": "dead",
+      "picture": "./publicPictures/loi1.jpg",
+      "height": 20,
+      "weight": 5,
+      "color": "black and white",
+      "bio": "kind of shitty, but he was okay",
+      "hypoallergenic": "no",
+      "dietaryRestrictions": "none"
+    }
+  }
+]

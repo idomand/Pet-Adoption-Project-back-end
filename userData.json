@@ -1,0 +1,74 @@
+[
+  {
+    "0": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "1": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "2": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "3": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "4": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "5": {
+      "name": "עידו מנדלמן",
+      "email": "idomand@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "6": {
+      "name": "dana bar ilan",
+      "email": "danabarilan@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  },
+  {
+    "7": {
+      "name": "dana bar ilan",
+      "email": "danabarilan@gmail.com",
+      "phoneNumber": "0545371198",
+      "password": "1234",
+      "passwordConfirmation": "1234"
+    }
+  }
+]

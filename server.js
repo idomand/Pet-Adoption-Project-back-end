@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 5555;
+const bodyParser = require("body-parser");
 
 const cors = require("cors");
 const userRouter = require("./routes/userRouter");
@@ -30,8 +31,8 @@ const petsRouter = require("./routes/petsRouter");
 // });
 
 // ==============
-
-app.use(express.json());
+app.use(bodyParser.json());
+// app.use(express.json());
 app.use(cors());
 app.get("/", (req, res) => res.send("Hello World!"));
 
@@ -41,76 +42,3 @@ app.use("/pets", petsRouter);
 // app.get("/user", (req, res) => res.send("this is user[GET] in backend-server"));
 
 app.listen(port, () => console.log(`Listening on port 5555!`));
-
-// [
-//     {
-//       "user1": {
-//         "isAdmin": true,
-//         "isLogIn": true,
-//         "userName": "ido",
-//         "userEmail": "bob@gmail.com"
-//       }
-//     },
-//     {
-//       "user1": {
-//         "type": "cat",
-//         "breed": "mixed",
-//         "name": "loi",
-//         "adoptionStatus": "dead",
-//         "picture": "./publicPictures/loi1.jpg",
-//         "height": 20,
-//         "weight": 5,
-//         "color": "black and white",
-//         "bio": "kind of shitty, but he was okay",
-//         "hypoallergenic": "no",
-//         "dietaryRestrictions": "none"
-//       }
-//     }
-//   ]
-
-// const express = require("express");
-// const app = express();
-// const port = 5555;
-
-// var cors = require("cors");
-// const userRouter = require("./routes/userRouter");
-// const petsRouter = require("./routes/petsRouter");
-
-// // ==============
-
-// app.use(express.json());
-// app.use(cors());
-// app.get("/", (req, res) => res.send("Hello World!"));
-
-// app.use("/users", userRouter);
-// app.use("/pets", petsRouter);
-
-// // app.get("/user", (req, res) => res.send("this is user[GET] in backend-server"));
-
-// app.listen(port, () => console.log(`Listening on port 5555!`));
-
-// // [
-// //     {
-// //       "user1": {
-// //         "isAdmin": true,
-// //         "isLogIn": true,
-// //         "userName": "ido",
-// //         "userEmail": "bob@gmail.com"
-// //       }
-// //     },
-// //     {
-// //       "user1": {
-// //         "type": "cat",
-// //         "breed": "mixed",
-// //         "name": "loi",
-// //         "adoptionStatus": "dead",
-// //         "picture": "./publicPictures/loi1.jpg",
-// //         "height": 20,
-// //         "weight": 5,
-// //         "color": "black and white",
-// //         "bio": "kind of shitty, but he was okay",
-// //         "hypoallergenic": "no",
-// //         "dietaryRestrictions": "none"
-// //       }
-// //     }
-// //   ]

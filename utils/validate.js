@@ -1,13 +1,18 @@
-const checkUniqueEmail = (arr, obj) => {
-  console.log(obj.email);
-  arr.forEach((element) => {
-    for (let xx in element) {
-      if (obj.email === element[xx].email) {
-        console.log("there is a double");
-        return;
-      }
-    }
-  });
+// const checkUniqueEmail = (word, array) => {
+//   let result = true;
+//   array.forEach((element) => {
+//     if (element.email == word) {
+//       result = false;
+//       return;
+//     } else {
+//     }
+//   });
+//   return result;
+// };
+const checkUniqueEmail = (email) => {
+  
+  
+  
 };
 
 module.exports = { checkUniqueEmail };

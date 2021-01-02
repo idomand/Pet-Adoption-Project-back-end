@@ -1,7 +1,10 @@
-// const fs = require("fs");
-const { checkUniqueEmail } = require("../utils/validate");
-
+// const { checkUniqueEmail } = require("../utils/validate");
+const {
+  encryptPassword,
+  comparePasswords,
+} = require("../utils/passwordEncryption");
 const { MongoClient, ObjectID } = require("mongodb");
+const { response } = require("express");
 require("dotenv").config();
 
 module.exports = class UserData {
@@ -23,7 +26,6 @@ module.exports = class UserData {
   }
 
   getAllData = async () => {
-    console.log("this is user model get all data");
     let result;
     try {
       const all_db_users = this.user_collection
@@ -38,60 +40,78 @@ module.exports = class UserData {
     }
   };
 
-  signUp = async (obj) => {
-    checkUniqueEmail(this.db, obj);
+  checkUniqueEmail = async (newEmail) => {
+    try {
+      const isUnique = await this.user_collection.findOne({
+        email: { $eq: newEmail },
+      });
+      if (isUnique) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    let id = this.db.length;
-    const newObject = {};
-    newObject[id] = obj;
-    this.db.push(newObject);
-    fs.writeFileSync(filePath, JSON.stringify(this.db));
+  signUpNewUser = async (obj) => {
+    // const listOfAllUsers = await this.getAllUsers();
+    // if (isEmailUnique) {
+    // }
+    const newObject = await encryptPassword(obj);
+    try {
+      this.user_collection.insertOne(newObject);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  getAllUsers = async () => {
+    const listOfAllUsers = await this.user_collection.find().toArray();
+    return listOfAllUsers;
+  };
+
+  loginUser = async (loginObject) => {
+    const targetUser = await this.user_collection.findOne({
+      email: { $eq: loginObject.email },
+    });
+    if (targetUser) {
+      console.log("there is a user like that");
+      const isPasswordCorrect = await comparePasswords(
+        loginObject.password,
+        targetUser.password
+      );
+      if (isPasswordCorrect) {
+        let returnUserObject = {
+          isAdmin: true,
+          name: targetUser.name,
+          email: targetUser.email,
+          phoneNumber: targetUser.phoneNumber,
+          id: targetUser.id,
+          commend: "password is correct",
+        };
+
+        return returnUserObject;
+      } else {
+        return "incorrect password";
+      }
+    } else {
+      console.log("there is no user like that");
+      return "unknown Email";
+    }
+  };
+  checkUniqueEmail = async (newEmail) => {
+    try {
+      const isUnique = await this.user_collection.findOne({
+        email: { $eq: newEmail },
+      });
+      if (isUnique) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 };
-
-// app.get("/users", (req, res) => {
-//
-
-// const fs = require("fs");
-// const { checkUniqueEmail } = require("../utils/validate");
-
-// const filePath = "./userData.json";
-
-// module.exports = class UserData {
-//   constructor() {
-//     this.db = JSON.parse(fs.readFileSync(filePath, "utf8"));
-//   }
-
-//   getAllData = () => {
-//     console.log("this is user model get all data");
-//     return this.db;
-//   };
-
-//   signUp = async (obj) => {
-//     checkUniqueEmail(this.db, obj);
-
-//     let id = this.db.length;
-//     const newObject = {};
-//     newObject[id] = obj;
-//     this.db.push(newObject);
-//     fs.writeFileSync(filePath, JSON.stringify(this.db));
-//   };
-// };
-
-// // app.get("/users", (req, res) => {
-// //   try {
-// //     // Get all users from Mongo
-// //     all_db_users = user_collection
-// //       .find()
-// //       .toArray()
-// //       .then((users) => {
-// //         console.log("users!!!!!!");
-// //         console.log(users);
-// //         res.send(users);
-// //       });
-// //   } catch (err) {
-// //     res.send(
-// //       `We have error: ${err.stack}. Sorry. We appreciate your patience while we work this out.`
-// //     );
-// //   }
-// // });

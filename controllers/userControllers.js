@@ -1,21 +1,32 @@
+const e = require("express");
 const UserDb = require("../models/userModel");
 const userDb = new UserDb();
 
 const getData = async (req, res) => {
-  console.log("this is get data");
   const foo = await userDb.getAllData();
-  // console.log("foo", foo);
   res.send(foo);
 };
 
-const signUpNewUser = (req, res) => {
-  // run(req.body);
+const signUpNewUser = async (req, res) => {
+  const isUnique = await userDb.checkUniqueEmail(req.body.email);
+  if (isUnique) {
+    userDb.signUpNewUser(req.body);
+    res.send("ok");
+  } else {
+    res.send("Email already in use");
+  }
 };
 
-// const signUpNewUser = (req, res) => {
-//   // console.log(req.body);
-//   console.log("this is signUpNewUser in userControllers");
-//   userDb.signUp(req.body);
-// };
+const loginUser = async (req, res) => {
+  console.log("req.body", req.body);
+  const isUserExist = await userDb.loginUser(req.body);
+  if (isUserExist === "incorrect password") {
+    res.send("incorrect password");
+  } else if (isUserExist === "unknown Email") {
+    res.send("unknown Email");
+  } else if (isUserExist.commend === "password is correct") {
+    res.send(isUserExist);
+  }
+};
 
-module.exports = { getData, signUpNewUser };
+module.exports = { getData, signUpNewUser, loginUser };

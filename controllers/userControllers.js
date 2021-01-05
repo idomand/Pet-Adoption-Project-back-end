@@ -10,7 +10,7 @@ const getData = async (req, res) => {
 const signUpNewUser = async (req, res) => {
   const isUnique = await userDb.checkUniqueEmail(req.body.email);
   if (isUnique) {
-    userDb.signUpNewUser(req.body);
+    await userDb.signUpNewUser(req.body);
     res.send("ok");
   } else {
     res.send("Email already in use");
@@ -18,7 +18,6 @@ const signUpNewUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  console.log("req.body", req.body);
   const isUserExist = await userDb.loginUser(req.body);
   if (isUserExist === "incorrect password") {
     res.send("incorrect password");

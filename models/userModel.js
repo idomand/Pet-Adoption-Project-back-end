@@ -16,7 +16,7 @@ module.exports = class UserData {
     this.user_collection = "";
     client.connect().then(async (response) => {
       if (response.topology.s.state) {
-        console.log("Status: " + response.topology.s.state);
+        console.log("Status: " + response.topology.s.state + " to user model");
         const db = client.db("myPetProject");
         this.user_collection = db.collection("users");
       } else {
@@ -56,12 +56,13 @@ module.exports = class UserData {
   };
 
   signUpNewUser = async (obj) => {
-    // const listOfAllUsers = await this.getAllUsers();
-    // if (isEmailUnique) {
-    // }
     const newObject = await encryptPassword(obj);
     try {
-      this.user_collection.insertOne(newObject);
+      await this.user_collection.insertOne(newObject);
+      // const allUsers = await this.user_collection.find({});
+      // allUsers.forEach((element) => {
+      //   console.log("element", element);
+      // });
     } catch (err) {
       console.error(err);
     }
@@ -76,13 +77,13 @@ module.exports = class UserData {
       email: { $eq: loginObject.email },
     });
     if (targetUser) {
-      console.log("there is a user like that");
       const isPasswordCorrect = await comparePasswords(
         loginObject.password,
         targetUser.password
       );
       if (isPasswordCorrect) {
         let returnUserObject = {
+          isLogin: true,
           isAdmin: true,
           name: targetUser.name,
           email: targetUser.email,
@@ -96,7 +97,6 @@ module.exports = class UserData {
         return "incorrect password";
       }
     } else {
-      console.log("there is no user like that");
       return "unknown Email";
     }
   };

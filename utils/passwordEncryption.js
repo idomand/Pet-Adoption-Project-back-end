@@ -9,7 +9,6 @@ const encryptPassword = async (obj) => {
 
 const comparePasswords = async (testPassword, userDbPassword) => {
   const isPasswordCorrect = await bcrypt.compare(testPassword, userDbPassword);
-  console.log(isPasswordCorrect);
   return isPasswordCorrect;
 };
 

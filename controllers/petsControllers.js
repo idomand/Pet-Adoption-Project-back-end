@@ -1,22 +1,26 @@
 const PetsDb = require("../models/petsModel");
 const petsDb = new PetsDb();
 
-const getAllPets = (req, res) => {
-  console.log("this is pets get data");
-  console.log(petsDb);
-  const data = petsDb.getAllData();
+const getAllPets = async (req, res) => {
+  const data = await petsDb.getAllData();
   res.json(data);
 };
 
-const getPetsByType = (req, res) => {
-  console.log("this is getPetsByType in petsControllers");
-  const { type } = req.params;
-  console.log(type);
-  const result = petsDb.getPetsByType(type);
-  console.log("==========");
-  console.log(result);
-  console.log("==========");
+const addPet = async (req, res) => {
+  const result = await petsDb.addNewPet(req.body);
   res.json(result);
 };
 
-module.exports = { getAllPets, getPetsByType };
+const searchPetsByParameters = async (req, res) => {
+  console.log("this is searchPetsByParameters in controller");
+  const parameters = req.params.parameters;
+
+  const result = await petsDb.searchPetsByParameters(parameters);
+  res.json(result);
+};
+const editPet = async (req, res) => {
+  const result = await petsDb.editPet(req.body);
+  res.json(result);
+};
+
+module.exports = { getAllPets, searchPetsByParameters, addPet, editPet };

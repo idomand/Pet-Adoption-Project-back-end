@@ -1,9 +1,16 @@
 const express = require("express");
 const petsRouter = express.Router();
 
-const { getAllPets, getPetsByType } = require("../controllers/petsControllers");
+const {
+  getAllPets,
+  searchPetsByParameters,
+  addPet,
+  editPet,
+} = require("../controllers/petsControllers");
 
+petsRouter.put("/:id", editPet);
 petsRouter.get("/", getAllPets);
-petsRouter.get("/:type", getPetsByType);
+petsRouter.get("/:parameters", searchPetsByParameters);
+petsRouter.post("/", addPet);
 
 module.exports = petsRouter;

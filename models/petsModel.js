@@ -51,18 +51,7 @@ module.exports = class PetsData {
   };
 
   searchPetsByParameters = async (parameters) => {
-    console.log("this is searchPetsByParameters in model");
-    console.log("parameters--------", parameters);
     let result;
-
-    // let foo = JSON.parse(parameters);
-    // let bar = {};
-    // for (let element in foo) {
-    //   if (foo[element]) {
-    //     bar[element] = foo[element];
-    //   }
-    // }
-    // console.log("bar", bar);
     if (parameters[0] == "{") {
       const {
         petName,
@@ -87,7 +76,6 @@ module.exports = class PetsData {
           .toArray();
       }
     }
-    console.log("result!!!", result);
     return result;
   };
   addNewPet = async (obj) => {

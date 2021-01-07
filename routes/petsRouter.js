@@ -6,11 +6,18 @@ const {
   searchPetsByParameters,
   addPet,
   editPet,
+  uploadPetImage,
+  getPetImages,
+  newFunc,
 } = require("../controllers/petsControllers");
 
 petsRouter.put("/:id", editPet);
 petsRouter.get("/", getAllPets);
-petsRouter.get("/:parameters", searchPetsByParameters);
 petsRouter.post("/", addPet);
+petsRouter.get("/:parameters", searchPetsByParameters);
+petsRouter.get("/newFunc", newFunc);
+
+petsRouter.get("/getPetImages", getPetImages);
+petsRouter.post("/petImages", uploadPetImage);
 
 module.exports = petsRouter;

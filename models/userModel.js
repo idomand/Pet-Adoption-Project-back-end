@@ -1,4 +1,3 @@
-// const { checkUniqueEmail } = require("../utils/validate");
 const {
   encryptPassword,
   comparePasswords,
@@ -59,10 +58,6 @@ module.exports = class UserData {
     const newObject = await encryptPassword(obj);
     try {
       await this.user_collection.insertOne(newObject);
-      // const allUsers = await this.user_collection.find({});
-      // allUsers.forEach((element) => {
-      //   console.log("element", element);
-      // });
     } catch (err) {
       console.error(err);
     }

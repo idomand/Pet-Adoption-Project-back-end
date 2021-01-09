@@ -2,16 +2,17 @@ const e = require("express");
 const UserDb = require("../models/userModel");
 const userDb = new UserDb();
 
-const getData = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
-    const foo = await userDb.getAllData();
-    res.send(foo);
+    const foo = await userDb.getAllUsers();
+    res.json(foo);
   } catch (error) {
     console.error(error);
   }
 };
 
 const signUpNewUser = async (req, res) => {
+
   try {
     const isUnique = await userDb.checkUniqueEmail(req.body.email);
     if (isUnique) {
@@ -26,6 +27,7 @@ const signUpNewUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+
   try {
     const isUserExist = await userDb.loginUser(req.body);
     if (isUserExist === "incorrect password") {
@@ -40,4 +42,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { getData, signUpNewUser, loginUser };
+module.exports = { getAllUsers, signUpNewUser, loginUser };

@@ -6,8 +6,9 @@ const { MongoClient, ObjectID } = require("mongodb");
 const { response } = require("express");
 require("dotenv").config();
 
-module.exports = class PetsData {
+module.exports = class PetsModel {
   constructor() {
+
     const username = process.env.DB_username;
     const password = process.env.DB_password;
     const url = `mongodb+srv://${username}:${password}@cluster0.v3cxr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
@@ -25,6 +26,7 @@ module.exports = class PetsData {
   }
 
   editPet = async (petObject) => {
+
     const targetId = petObject._id;
     const result = await this.pets_collection.replaceOne(
       {
@@ -36,6 +38,7 @@ module.exports = class PetsData {
   };
 
   getAllData = async () => {
+
     let result;
     try {
       const alPets = this.pets_collection
@@ -51,6 +54,7 @@ module.exports = class PetsData {
   };
 
   searchPetsByParameters = async (parameters) => {
+
     let result;
     if (parameters[0] == "{") {
       const {
@@ -79,6 +83,7 @@ module.exports = class PetsData {
     return result;
   };
   addNewPet = async (obj) => {
+
     await this.pets_collection.insertOne(obj);
   };
 };

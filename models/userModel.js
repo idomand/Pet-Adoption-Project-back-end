@@ -6,7 +6,7 @@ const { MongoClient, ObjectID } = require("mongodb");
 const { response } = require("express");
 require("dotenv").config();
 
-module.exports = class UserData {
+module.exports = class UserModel {
   constructor() {
     const username = process.env.DB_username;
     const password = process.env.DB_password;
@@ -24,7 +24,7 @@ module.exports = class UserData {
     });
   }
 
-  getAllData = async () => {
+  getAllUsers = async () => {
     let result;
     try {
       const all_db_users = this.user_collection
@@ -40,6 +40,7 @@ module.exports = class UserData {
   };
 
   checkUniqueEmail = async (newEmail) => {
+
     try {
       const isUnique = await this.user_collection.findOne({
         email: { $eq: newEmail },
@@ -68,6 +69,7 @@ module.exports = class UserData {
   };
 
   loginUser = async (loginObject) => {
+
     const targetUser = await this.user_collection.findOne({
       email: { $eq: loginObject.email },
     });
@@ -96,6 +98,7 @@ module.exports = class UserData {
     }
   };
   checkUniqueEmail = async (newEmail) => {
+
     try {
       const isUnique = await this.user_collection.findOne({
         email: { $eq: newEmail },

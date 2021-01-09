@@ -7,12 +7,7 @@ const cors = require("cors");
 const userRouter = require("./routes/userRouter");
 const petsRouter = require("./routes/petsRouter");
 
-// ==============
-// ==============
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-// ==============
-// ==============
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());

@@ -43,11 +43,10 @@ const uploadPetImage = async (req, res) => {
     res.status(500).json({ err: "Something went wrong" });
   }
 };
-const getPetImages = async (req, res) => {
-};
+const getPetImages = async (req, res) => {};
 
 const newFunc = async (req, res) => {
-  res.json("OKK!!!!!!!!!!1");
+  res.json("OK");
 };
 
 module.exports = {

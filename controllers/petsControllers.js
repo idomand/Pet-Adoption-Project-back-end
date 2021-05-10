@@ -40,7 +40,7 @@ const uploadPetImage = async (req, res) => {
     });
     res.json({ msg: "yaya" });
   } catch (err) {
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({ err: "Something went wrong in the code" });
   }
 };
 const getPetImages = async (req, res) => {};

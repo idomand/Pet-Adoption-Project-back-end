@@ -12,8 +12,8 @@ const {
 } = require("../controllers/petsControllers");
 
 petsRouter.put("/:id", editPet);
-petsRouter.get("/", getAllPets);
 petsRouter.post("/", addPet);
+petsRouter.get("/", getAllPets);
 petsRouter.get("/:parameters", searchPetsByParameters);
 petsRouter.get("/newFunc", newFunc);
 

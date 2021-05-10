@@ -8,7 +8,6 @@ require("dotenv").config();
 
 module.exports = class PetsModel {
   constructor() {
-
     const username = process.env.DB_username;
     const password = process.env.DB_password;
     const url = `mongodb+srv://${username}:${password}@cluster0.v3cxr.mongodb.net/<dbname>?retryWrites=true&w=majority`;
@@ -20,13 +19,12 @@ module.exports = class PetsModel {
         const db = client.db("myPetProject");
         this.pets_collection = db.collection("pets");
       } else {
-        console.log("Problem connecting to MongoDB");
+        console.log("Problem connecting to MongoDB database");
       }
     });
   }
 
   editPet = async (petObject) => {
-
     const targetId = petObject._id;
     const result = await this.pets_collection.replaceOne(
       {
@@ -38,7 +36,6 @@ module.exports = class PetsModel {
   };
 
   getAllData = async () => {
-
     let result;
     try {
       const alPets = this.pets_collection
@@ -54,7 +51,6 @@ module.exports = class PetsModel {
   };
 
   searchPetsByParameters = async (parameters) => {
-
     let result;
     if (parameters[0] == "{") {
       const {
@@ -83,7 +79,6 @@ module.exports = class PetsModel {
     return result;
   };
   addNewPet = async (obj) => {
-
     await this.pets_collection.insertOne(obj);
   };
 };
